@@ -16,6 +16,8 @@ class MathUtilsTest extends Object {
     }
 
     @Nested
+    @DisplayName("Add method")
+    @Tag("Math")
     class AddTest {
 
         @Test
@@ -27,16 +29,20 @@ class MathUtilsTest extends Object {
         @Test
         @DisplayName("Testing add method for -")
         void testAddNegative() {
-            assertEquals(-2, mathUtils.add(-1, -1), "The add function should add two numbers");
+            int expected = -2;
+            int actual = mathUtils.add(-1, -1);
+            assertEquals(expected, actual, () -> "The add function should return " + expected + " and returns " + actual);
         }
     }
 
     @Test
+    @Tag("Math")
     void testDivide() {
         assertThrows(ArithmeticException.class, () -> mathUtils.divide(1, 0), "divide by zero should throw");
     }
 
     @Test
+    @Tag("Math")
     void testMultiply() {
         assertAll(
                 () -> assertEquals(4, mathUtils.multiply(2, 2)),
@@ -45,7 +51,8 @@ class MathUtilsTest extends Object {
         );
     }
 
-    @Test
+    @Test()
+    @Tag("Circle")
     void testComputeCircleArea() {
         assertEquals(314.1592653589793, mathUtils.computeCircleArea(10), "Should return right circle area.");
     }
