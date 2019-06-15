@@ -5,14 +5,18 @@ import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assumptions.*;
 
-class MathUtilsTest extends Object {
+class MathUtilsTest {
 
+    private MathUtils mathUtils;
+    private TestInfo testInfo;
+    private TestReporter testReporter;
 
-    MathUtils mathUtils;
-
-    @BeforeEach
-    void init() {
+    @BeforeEach //argument are passed by dependency injection
+    void init(TestInfo testInfo, TestReporter testReporter) {
         mathUtils = new MathUtils();
+        this.testInfo = testInfo;
+        this.testReporter = testReporter;
+        testReporter.publishEntry("Running " + testInfo.getDisplayName() + " with tags " + testInfo.getTags());
     }
 
     @Nested
@@ -55,7 +59,7 @@ class MathUtilsTest extends Object {
     @Tag("Circle")
     void testComputeCircleArea(RepetitionInfo repetitionInfo) {
         if (repetitionInfo.getCurrentRepetition() == 1) {
-            //do something...
+            System.out.println("first time");
         }
         assertEquals(314.1592653589793, mathUtils.computeCircleArea(10), "Should return right circle area.");
     }
