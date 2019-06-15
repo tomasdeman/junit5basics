@@ -51,9 +51,12 @@ class MathUtilsTest extends Object {
         );
     }
 
-    @Test()
+    @RepeatedTest(3)
     @Tag("Circle")
-    void testComputeCircleArea() {
+    void testComputeCircleArea(RepetitionInfo repetitionInfo) {
+        if (repetitionInfo.getCurrentRepetition() == 1) {
+            //do something...
+        }
         assertEquals(314.1592653589793, mathUtils.computeCircleArea(10), "Should return right circle area.");
     }
 
